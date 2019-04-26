@@ -27,11 +27,24 @@ def show_afterparty_form():
 def find_afterparties():
     """Search for afterparties on Eventbrite"""
 
+    url = 'https://www.eventbriteapi.com/v3/events/search/'
+    
+
     query = request.args.get('query')
     location = request.args.get('location')
     distance = request.args.get('distance')
     measurement = request.args.get('measurement')
     sort = request.args.get('sort')
+
+    payload = { 'q' : query,
+                'token' : 'RX743SUCYJVNXSMPC4XF',
+                }
+
+               # 'location.address' : location,
+               #  'location.within' : distance + measurement,
+
+
+    r = requests.get(url, params=payload)
 
     # If the required information is in the request, look for afterparties
     if location and distance and measurement:
